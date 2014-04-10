@@ -7,10 +7,9 @@
 //
 
 
-#import "KVCBaseObject.h"
 #import "Glossary.h"
 
-@interface ParentObject : KVCBaseObject
+@interface ParentObject : NSObject
 {
     Glossary * glossary;
 }

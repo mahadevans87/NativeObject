@@ -6,10 +6,9 @@
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "KVCBaseObject.h"
 #import "GlossList.h"
 
-@interface GlossDiv : KVCBaseObject
+@interface GlossDiv : NSObject
 {
     GlossList * GlossList;
     NSString * title;

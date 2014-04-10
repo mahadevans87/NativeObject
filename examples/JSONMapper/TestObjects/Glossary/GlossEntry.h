@@ -6,10 +6,9 @@
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "KVCBaseObject.h"
 #import "GlossDef.h"
 
-@interface GlossEntry : KVCBaseObject
+@interface GlossEntry : NSObject
 {
     NSString * Abbrev;
     NSString * Acronym;

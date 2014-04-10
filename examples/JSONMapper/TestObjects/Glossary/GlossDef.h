@@ -7,9 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "KVCBaseObject.h"
 
-@interface GlossDef : KVCBaseObject
+@interface GlossDef : NSObject
 {
     NSArray * GlossSeeAlso;
 }

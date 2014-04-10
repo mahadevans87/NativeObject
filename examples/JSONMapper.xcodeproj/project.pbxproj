@@ -47,6 +47,13 @@
 		609CA94018F5AD7400224CF5 /* MagicalRecord+Setup.m in Sources */ = {isa = PBXBuildFile; fileRef = 609CA92118F5AD7400224CF5 /* MagicalRecord+Setup.m */; };
 		609CA94118F5AD7400224CF5 /* MagicalRecord+ShorthandSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 609CA92318F5AD7400224CF5 /* MagicalRecord+ShorthandSupport.m */; };
 		609CA94218F5AD7400224CF5 /* MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 609CA92518F5AD7400224CF5 /* MagicalRecord.m */; };
+		60E2066318F63D1D00FE8159 /* sample_json.txt in Resources */ = {isa = PBXBuildFile; fileRef = 60E2065518F63D1D00FE8159 /* sample_json.txt */; };
+		60E2067818F63DE000FE8159 /* Glossary.m in Sources */ = {isa = PBXBuildFile; fileRef = 60E2066D18F63DE000FE8159 /* Glossary.m */; };
+		60E2067918F63DE000FE8159 /* GlossDef.m in Sources */ = {isa = PBXBuildFile; fileRef = 60E2066F18F63DE000FE8159 /* GlossDef.m */; };
+		60E2067A18F63DE000FE8159 /* GlossDiv.m in Sources */ = {isa = PBXBuildFile; fileRef = 60E2067118F63DE000FE8159 /* GlossDiv.m */; };
+		60E2067B18F63DE000FE8159 /* GlossEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 60E2067318F63DE000FE8159 /* GlossEntry.m */; };
+		60E2067C18F63DE000FE8159 /* GlossList.m in Sources */ = {isa = PBXBuildFile; fileRef = 60E2067518F63DE000FE8159 /* GlossList.m */; };
+		60E2067D18F63DE000FE8159 /* ParentObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 60E2067718F63DE000FE8159 /* ParentObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,6 +141,19 @@
 		609CA92618F5AD7400224CF5 /* MagicalRecordLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalRecordLogging.h; sourceTree = "<group>"; };
 		609CA92718F5AD7400224CF5 /* MagicalRecordShorthand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalRecordShorthand.h; sourceTree = "<group>"; };
 		609CA92818F5AD7400224CF5 /* CoreData+MagicalRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoreData+MagicalRecord.h"; sourceTree = "<group>"; };
+		60E2065518F63D1D00FE8159 /* sample_json.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sample_json.txt; sourceTree = "<group>"; };
+		60E2066C18F63DE000FE8159 /* Glossary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Glossary.h; sourceTree = "<group>"; };
+		60E2066D18F63DE000FE8159 /* Glossary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Glossary.m; sourceTree = "<group>"; };
+		60E2066E18F63DE000FE8159 /* GlossDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlossDef.h; sourceTree = "<group>"; };
+		60E2066F18F63DE000FE8159 /* GlossDef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlossDef.m; sourceTree = "<group>"; };
+		60E2067018F63DE000FE8159 /* GlossDiv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlossDiv.h; sourceTree = "<group>"; };
+		60E2067118F63DE000FE8159 /* GlossDiv.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlossDiv.m; sourceTree = "<group>"; };
+		60E2067218F63DE000FE8159 /* GlossEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlossEntry.h; sourceTree = "<group>"; };
+		60E2067318F63DE000FE8159 /* GlossEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlossEntry.m; sourceTree = "<group>"; };
+		60E2067418F63DE000FE8159 /* GlossList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlossList.h; sourceTree = "<group>"; };
+		60E2067518F63DE000FE8159 /* GlossList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlossList.m; sourceTree = "<group>"; };
+		60E2067618F63DE000FE8159 /* ParentObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParentObject.h; sourceTree = "<group>"; };
+		60E2067718F63DE000FE8159 /* ParentObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParentObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +215,8 @@
 		609CA86618F5A0BA00224CF5 /* JSONMapper */ = {
 			isa = PBXGroup;
 			children = (
+				60E2066A18F63DE000FE8159 /* TestObjects */,
+				60E2065518F63D1D00FE8159 /* sample_json.txt */,
 				609CA88F18F5A48500224CF5 /* NativeObject */,
 				609CA86F18F5A0BA00224CF5 /* AppDelegate.h */,
 				609CA87018F5A0BA00224CF5 /* AppDelegate.m */,
@@ -346,6 +368,33 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
+		60E2066A18F63DE000FE8159 /* TestObjects */ = {
+			isa = PBXGroup;
+			children = (
+				60E2066B18F63DE000FE8159 /* Glossary */,
+			);
+			path = TestObjects;
+			sourceTree = "<group>";
+		};
+		60E2066B18F63DE000FE8159 /* Glossary */ = {
+			isa = PBXGroup;
+			children = (
+				60E2066C18F63DE000FE8159 /* Glossary.h */,
+				60E2066D18F63DE000FE8159 /* Glossary.m */,
+				60E2066E18F63DE000FE8159 /* GlossDef.h */,
+				60E2066F18F63DE000FE8159 /* GlossDef.m */,
+				60E2067018F63DE000FE8159 /* GlossDiv.h */,
+				60E2067118F63DE000FE8159 /* GlossDiv.m */,
+				60E2067218F63DE000FE8159 /* GlossEntry.h */,
+				60E2067318F63DE000FE8159 /* GlossEntry.m */,
+				60E2067418F63DE000FE8159 /* GlossList.h */,
+				60E2067518F63DE000FE8159 /* GlossList.m */,
+				60E2067618F63DE000FE8159 /* ParentObject.h */,
+				60E2067718F63DE000FE8159 /* ParentObject.m */,
+			);
+			path = Glossary;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -422,6 +471,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				609CA86B18F5A0BA00224CF5 /* InfoPlist.strings in Resources */,
+				60E2066318F63D1D00FE8159 /* sample_json.txt in Resources */,
 				609CA87318F5A0BA00224CF5 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -445,6 +495,7 @@
 				609CA93418F5AD7400224CF5 /* NSManagedObject+MagicalRequests.m in Sources */,
 				609CA93C18F5AD7400224CF5 /* MagicalRecord+Actions.m in Sources */,
 				609CA93B18F5AD7400224CF5 /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */,
+				60E2067D18F63DE000FE8159 /* ParentObject.m in Sources */,
 				609CA92918F5AD7400224CF5 /* MagicalImportFunctions.m in Sources */,
 				609CA92A18F5AD7400224CF5 /* NSAttributeDescription+MagicalDataImport.m in Sources */,
 				609CA93E18F5AD7400224CF5 /* MagicalRecord+iCloud.m in Sources */,
@@ -455,13 +506,17 @@
 				609CA93218F5AD7400224CF5 /* NSManagedObject+MagicalFinders.m in Sources */,
 				609CA93518F5AD7400224CF5 /* NSManagedObjectContext+MagicalObserving.m in Sources */,
 				609CA93318F5AD7400224CF5 /* NSManagedObject+MagicalRecord.m in Sources */,
+				60E2067C18F63DE000FE8159 /* GlossList.m in Sources */,
 				609CA93718F5AD7400224CF5 /* NSManagedObjectContext+MagicalSaves.m in Sources */,
+				60E2067B18F63DE000FE8159 /* GlossEntry.m in Sources */,
 				609CA93A18F5AD7400224CF5 /* NSPersistentStore+MagicalRecord.m in Sources */,
+				60E2067A18F63DE000FE8159 /* GlossDiv.m in Sources */,
 				609CA94018F5AD7400224CF5 /* MagicalRecord+Setup.m in Sources */,
 				609CA92B18F5AD7400224CF5 /* NSEntityDescription+MagicalDataImport.m in Sources */,
 				609CA92F18F5AD7400224CF5 /* NSString+MagicalDataImport.m in Sources */,
 				609CA92D18F5AD7400224CF5 /* NSObject+MagicalDataImport.m in Sources */,
 				609CA93F18F5AD7400224CF5 /* MagicalRecord+Options.m in Sources */,
+				60E2067818F63DE000FE8159 /* Glossary.m in Sources */,
 				609CA92E18F5AD7400224CF5 /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
 				609CA93018F5AD7400224CF5 /* NSManagedObject+MagicalAggregation.m in Sources */,
 				609CA93818F5AD7400224CF5 /* NSManagedObjectContext+MagicalThreading.m in Sources */,
@@ -469,6 +524,7 @@
 				609CA92C18F5AD7400224CF5 /* NSNumber+MagicalDataImport.m in Sources */,
 				609CA94218F5AD7400224CF5 /* MagicalRecord.m in Sources */,
 				609CA8E918F5A4BF00224CF5 /* NSObject+KVCSerializer.m in Sources */,
+				60E2067918F63DE000FE8159 /* GlossDef.m in Sources */,
 				609CA93D18F5AD7400224CF5 /* MagicalRecord+ErrorHandling.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,6 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "ParentObject.h"
 
 @interface JSONMapperTests : XCTestCase
 
@@ -26,9 +27,14 @@
     [super tearDown];
 }
 
-- (void)testExample
-{
-    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+-(void)testGlossarySampleJSON {
+    NSString * jsonString = [[NSString alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"sample_json" ofType:@"txt"] encoding:NSUTF8StringEncoding error:nil];
+    
+    NSDictionary * jDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+
+    NSArray * resultArray = (NSArray *)[ParentObject jsonToObject:jsonString];
+    ParentObject * parentObj = [resultArray objectAtIndex:0];
+    XCTAssertEqualObjects(parentObj.glossary.title, [[jDict objectForKey:@"glossary"] objectForKey:@"title"], @"Title in glossary obj not same");
 }
 
 @end
