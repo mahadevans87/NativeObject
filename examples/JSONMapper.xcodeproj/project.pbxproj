@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6042ED0D18F69E3F00CF10F2 /* DateTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6042ED0C18F69E3F00CF10F2 /* DateTest.m */; };
 		609CA86118F5A0BA00224CF5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 609CA86018F5A0BA00224CF5 /* Foundation.framework */; };
 		609CA86318F5A0BA00224CF5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 609CA86218F5A0BA00224CF5 /* CoreGraphics.framework */; };
 		609CA86518F5A0BA00224CF5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 609CA86418F5A0BA00224CF5 /* UIKit.framework */; };
@@ -67,6 +68,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6042ED0B18F69E3F00CF10F2 /* DateTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DateTest.h; path = Primitives/DateTest.h; sourceTree = "<group>"; };
+		6042ED0C18F69E3F00CF10F2 /* DateTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DateTest.m; path = Primitives/DateTest.m; sourceTree = "<group>"; };
 		609CA85D18F5A0BA00224CF5 /* JSONMapper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JSONMapper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		609CA86018F5A0BA00224CF5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		609CA86218F5A0BA00224CF5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -372,6 +375,8 @@
 			isa = PBXGroup;
 			children = (
 				60E2066B18F63DE000FE8159 /* Glossary */,
+				6042ED0B18F69E3F00CF10F2 /* DateTest.h */,
+				6042ED0C18F69E3F00CF10F2 /* DateTest.m */,
 			);
 			path = TestObjects;
 			sourceTree = "<group>";
@@ -522,6 +527,7 @@
 				609CA93818F5AD7400224CF5 /* NSManagedObjectContext+MagicalThreading.m in Sources */,
 				609CA93118F5AD7400224CF5 /* NSManagedObject+MagicalDataImport.m in Sources */,
 				609CA92C18F5AD7400224CF5 /* NSNumber+MagicalDataImport.m in Sources */,
+				6042ED0D18F69E3F00CF10F2 /* DateTest.m in Sources */,
 				609CA94218F5AD7400224CF5 /* MagicalRecord.m in Sources */,
 				609CA8E918F5A4BF00224CF5 /* NSObject+KVCSerializer.m in Sources */,
 				60E2067918F63DE000FE8159 /* GlossDef.m in Sources */,

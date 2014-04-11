@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "ParentObject.h"
+#import "DateTest.h"
 
 @interface JSONMapperTests : XCTestCase
 
@@ -34,7 +35,27 @@
 
     NSArray * resultArray = (NSArray *)[ParentObject jsonToObject:jsonString];
     ParentObject * parentObj = [resultArray objectAtIndex:0];
+    NSLog(@"%@",[parentObj objectToJson]);
     XCTAssertEqualObjects(parentObj.glossary.title, [[jDict objectForKey:@"glossary"] objectForKey:@"title"], @"Title in glossary obj not same");
+}
+
+-(void)testwhetherAclientCanDefineItsOwnMappingForCertainACertainKeyValuePair {
+    NSString * jsonString = @"{\"testDate\" : \"2015-02-04T17:33:30.732+0000\"}";
+    NSArray * resultArray = (NSArray *)[DateTest jsonToObject:jsonString];
+    DateTest * dateTest = [resultArray objectAtIndex:0];
+    NSLog(@"%@",dateTest.testDate);
+    XCTAssertTrue([dateTest.testDate isKindOfClass:[NSDate class]], @"test Date should be of type NSDate");
+}
+
+-(void)testThatAClientRollsoutItsOwnImplementationOfConvertingADateBacktoStringWhileConvertingToJson {
+    NSString * jsonString = @"{\"testDate\" : \"2015-02-04T17:33:30.732+0000\"}";
+    NSArray * resultArray = (NSArray *)[DateTest jsonToObject:jsonString];
+    DateTest * dateTest = [resultArray objectAtIndex:0];
+    NSLog(@"JSON reconversion back - result ------> %@",[dateTest objectToJson]);
+    NSDictionary * jDict = [NSJSONSerialization JSONObjectWithData:[[dateTest objectToJson] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+    
+    XCTAssertTrue([[jDict objectForKey:@"testDate"] isKindOfClass:[NSString class]], @"JSON Date type should be NSString");
+    
 }
 
 @end

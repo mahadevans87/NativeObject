@@ -20,7 +20,7 @@ const char * property_getTypeString( objc_property_t property );
 
 -(void)setTraversed:(BOOL)bTraversed {
     objc_setAssociatedObject(self, ObjectTagKey, [NSNumber numberWithBool:bTraversed], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-
+    
 }
 
 - (NSString *) getJsonKeyForPropertyName:(NSString *)propertyName {
@@ -43,23 +43,31 @@ const char * property_getTypeString( objc_property_t property );
 }
 
 
+-(id) getPropertyValueForName:(NSString *)propertyName withJsonKey:(NSString *)jsonKey andJsonValue:(NSString *)jsonValue {
+    return nil;
+}
+
+-(id) getJsonValueForName:(NSString *)propertyName withJsonKey:(NSString *)jsonKey andPropertyValue:(id)propertyValue {
+    return nil;
+}
+
 /*
  * Primary method to convert an input JSON to an NSObject / NSManagedObject
  */
- 
+
 + (id)jsonToObject:(NSString *) inputJSON {
     return [self jsonToObject:inputJSON fromPath:nil];
 }
 
 /*
- * Primary method to convert an input JSON to an NSObject / NSManagedObject. This method 
+ * Primary method to convert an input JSON to an NSObject / NSManagedObject. This method
  * will also allow the client to pass in a json path to a sub dictionary.
- * eg : parent : { child : { grandchild : { data we are interested in } }} 
+ * eg : parent : { child : { grandchild : { data we are interested in } }}
  * By specifiying "/child/grandchild" in the path, we can get the data we are interested in alone.
  */
 
 + (id)jsonToObject:(NSString *) inputJSON fromPath:(NSString *)path{
-
+    
     
     id jObject = [NSJSONSerialization JSONObjectWithData:[inputJSON dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
     if ([jObject isKindOfClass:[NSDictionary class]]) {
@@ -81,7 +89,7 @@ const char * property_getTypeString( objc_property_t property );
             }
         }
         return [NSArray arrayWithObject:[self dictionaryToObject:jDict]];
-
+        
     } else if ([jObject isKindOfClass:[NSArray class]]) {
         return [self arrayToObjectArray:(NSArray *)jObject];
     } else {
@@ -128,13 +136,13 @@ const char * property_getTypeString( objc_property_t property )
     char * parsedPropertyType = malloc(sizeof(char*) * 16);
     if (*rawPropType == 'T') {
         rawPropType++;
-    } else { 
+    } else {
         rawPropType = NULL;
     }
     
     if (rawPropType == NULL) {
         free(parsedPropertyType);
-
+        
         return NULL;
     }
     if (*rawPropType == '@') {
@@ -161,7 +169,7 @@ const char * property_getTypeString( objc_property_t property )
     }
     
     free(parsedPropertyType);
-
+    
     return ( NULL );
 }
 
@@ -176,7 +184,7 @@ const char * property_getTypeString( objc_property_t property )
         //[dict release];
         dict = [NSObject getPropertiesAndTypesForClassName:class_getName([class superclass])]; //retain];
     }
-    unsigned int outCount, i; objc_property_t *properties = class_copyPropertyList(class, &outCount); 
+    unsigned int outCount, i; objc_property_t *properties = class_copyPropertyList(class, &outCount);
     for (i = 0; i < outCount; i++) {
         objc_property_t property = properties[i];
         const char * propName = property_getName(property);
@@ -220,7 +228,7 @@ const char * property_getTypeString( objc_property_t property )
     if ([propertyType isEqualToString:@"NSString"] ||
         [propertyType isEqualToString:@"NSNumber"] ||
         [propertyType isEqualToString:@"NSInteger"] ||
-        [propertyType isEqualToString:@"float"] || 
+        [propertyType isEqualToString:@"float"] ||
         [propertyType isEqualToString:@"double"] ||
         [propertyType isEqualToString:@"BOOL"]) {
         
@@ -228,6 +236,13 @@ const char * property_getTypeString( objc_property_t property )
     } else {
         return NO;
     }
+}
+
++(BOOL) isPropertyTypeDate:(NSString *)propertyType {
+    if ([propertyType isEqualToString:@"NSDate"]) {
+        return YES;
+    }
+    return NO;
 }
 
 +(id) objectForPropertyKey:(NSString *)propertyType {
@@ -276,7 +291,7 @@ const char * property_getTypeString( objc_property_t property )
     }
     
     for (NSString * key in [inputDict allKeys]) {
-        id propertyValue = [inputDict objectForKey:key];
+        //id propertyValue = [inputDict objectForKey:key];
         
         NSString * propertyName = key;
         if (![propertyKeys containsObject:key]) {
@@ -292,64 +307,74 @@ const char * property_getTypeString( objc_property_t property )
                 continue;
             }
             
-            /*
-             * If the property type in an NSArray or NSMutable Array fill it with the component type
-             * NSManagedObjects usually has collections as NSSet's which is handled in the next case.
-             */
-            if ([NSObject isPropertyTypeArray:propType]) {
-                NSString * componentType = [kvcObject getComponentTypeForCollection:propertyName];
-                NSArray  * jArray = (NSArray *)propertyValue;
-
-                if ([[self class] isSubclassOfClass:[NSObject class]]) {
-                    // If the object has specified a type, create objects of that type. else
-                    // set the array as such.
-                    if ([componentType length] > 1) {
-                        NSArray * componentArray = [NSObject arrayForType:componentType withJSONArray:jArray];
-                        [kvcObject setValue:componentArray forKey:propertyName];
-                    } else {
-                        [kvcObject setValue:jArray forKey:propertyName];
-                    }
-                }
+            id propertyValue = [kvcObject getPropertyValueForName:propertyName withJsonKey:key andJsonValue:[inputDict objectForKey:key]];
+            
+            if (propertyValue != nil) {
+                [kvcObject setValue:propertyValue forKey:propertyName];
                 
-            } /*
-               * If the collection is an NSSet and the object is an NSManagedObject, we cannot simply add the relationship object to the set.
-               * Instead we have to call the add'RelationshipEntity'Object: which is specified in the CoreDataAccessors for that entity.
-               */
-            else if ([NSObject isPropertyTypeSet:propType]) {
-                NSString * componentType = [kvcObject getComponentTypeForCollection:propertyName];
-                NSArray  * jArray = (NSArray *)propertyValue;
-
+            } else {
+                propertyValue = [inputDict objectForKey:key];
+                /*
+                 * If the property type in an NSArray or NSMutable Array fill it with the component type
+                 * NSManagedObjects usually has collections as NSSet's which is handled in the next case.
+                 */
+                if ([NSObject isPropertyTypeArray:propType]) {
+                    NSString * componentType = [kvcObject getComponentTypeForCollection:propertyName];
+                    NSArray  * jArray = (NSArray *)propertyValue;
+                    
+                    if ([[self class] isSubclassOfClass:[NSObject class]]) {
+                        // If the object has specified a type, create objects of that type. else
+                        // set the array as such.
+                        if ([componentType length] > 1) {
+                            NSArray * componentArray = [NSObject arrayForType:componentType withJSONArray:jArray];
+                            [kvcObject setValue:componentArray forKey:propertyName];
+                        } else {
+                            [kvcObject setValue:jArray forKey:propertyName];
+                        }
+                    }
+                    
+                } /*
+                   * If the collection is an NSSet and the object is an NSManagedObject, we cannot simply add the relationship object to the set.
+                   * Instead we have to call the add'RelationshipEntity'Object: which is specified in the CoreDataAccessors for that entity.
+                   */
+                else if ([NSObject isPropertyTypeSet:propType]) {
+                    NSString * componentType = [kvcObject getComponentTypeForCollection:propertyName];
+                    NSArray  * jArray = (NSArray *)propertyValue;
+                    
                     if ([[self class] isSubclassOfClass:[NSManagedObject class]]) {
                         for (NSDictionary * item in jArray) {
                             Class childClass = NSClassFromString(componentType);
                             id kvcChild = [childClass dictionaryToObject:item];
                             NSString * capitalisedPropertyName = [propertyName stringByReplacingCharactersInRange:NSMakeRange(0,1)
-                                                                                              withString:[[propertyName substringToIndex:1] capitalizedString]];
+                                                                                                       withString:[[propertyName substringToIndex:1] capitalizedString]];
                             
                             NSString * selName = [NSString stringWithFormat:@"add%@Object:",capitalisedPropertyName];
                             SEL coreDataAccessorSEL  = NSSelectorFromString(selName);
                             [kvcObject performSelector:coreDataAccessorSEL withObject:kvcChild];
                         }
                     }
-                
-            } else if ([NSObject isPropertyTypeBasic:propType]) {
-                
-                [kvcObject setValue:propertyValue forKey:propertyName];
-                
-            } else {
-                /*
-                 * If the component is not any primitive type or array
-                 * create a custom object of it and pass the dictionary to it.
-                 */
-                Class childClass = NSClassFromString(propType);
-                if ([childClass isSubclassOfClass:[NSObject class]]) {
-                    id kvcChild = [childClass dictionaryToObject:propertyValue];
-                    [kvcObject setValue:kvcChild forKey:propertyName];
-                } else {
+                    
+                } else if ([NSObject isPropertyTypeBasic:propType]) {
+                    
                     [kvcObject setValue:propertyValue forKey:propertyName];
+                    
+                } else {
+                    /*
+                     * If the component is not any primitive type or array
+                     * create a custom object of it and pass the dictionary to it.
+                     */
+                    Class childClass = NSClassFromString(propType);
+                    if ([childClass isSubclassOfClass:[NSObject class]]) {
+                        id kvcChild = [childClass dictionaryToObject:propertyValue];
+                        [kvcObject setValue:kvcChild forKey:propertyName];
+                    } else {
+                        [kvcObject setValue:propertyValue forKey:propertyName];
+                    }
                 }
             }
+            
         }
+        
         
     }
     return kvcObject;// autorelease];
@@ -384,51 +409,19 @@ const char * property_getTypeString( objc_property_t property )
             continue;
         }
         
-        if ([NSObject isPropertyTypeArray:propType]) {
-            
-            NSArray * objArray = [self valueForKey:currentProperty];
-            if ([objArray count] > 0) {
-                id firstObject = [objArray objectAtIndex:0];
-                if ([firstObject isKindOfClass:[NSString class]] ||
-                    [firstObject isKindOfClass:[NSNumber class]]) {
-                    
-                    [resultDict setValue:objArray forKey:[self customKeyForPropertyName:currentProperty]];
-                    
-                } else {
-                    
-                    NSMutableArray * customObjArray = [[NSMutableArray alloc] init];
-                    for (id arrayObj in objArray) {
-                        if ([arrayObj isKindOfClass:[NSObject class]]){
-                            NSDictionary * childDict = [arrayObj objectToDictionary];
-                            [customObjArray addObject:childDict];
-                        }
-                    }
-                    [resultDict setValue:customObjArray forKey:[self customKeyForPropertyName:currentProperty]];
-                    //[customObjArray release];
-                    
-                }
-            } else {
-                NSArray * emptyArray = [[NSArray alloc] init];
-                [resultDict setValue:emptyArray forKey:[self customKeyForPropertyName:currentProperty]];
-                //[emptyArray release];
-            }
+        id propValue = [self valueForKey:currentProperty];
+        
+        id customValue = [self getJsonValueForName:currentProperty withJsonKey:[self customKeyForPropertyName:currentProperty] andPropertyValue:propValue];
+        if (customValue != nil) {
+            [resultDict setValue:customValue forKey:[self customKeyForPropertyName:currentProperty]];
 
-        } else if ([NSObject isPropertyTypeSet:propType]) {
-#warning Code Smell!
-            /*
-             * if the collection is a set, why not convert it to an array :)
-             * The below part needs cleanup. Code smell. Repetitive code
-             */
+        } else {
             
-            NSSet * objSet = [self valueForKey:currentProperty];
-            if (objSet.count > 0) {
-                NSArray * objArray = [objSet allObjects];
+            if ([NSObject isPropertyTypeArray:propType]) {
+                
+                NSArray * objArray = [self valueForKey:currentProperty];
                 if ([objArray count] > 0) {
                     id firstObject = [objArray objectAtIndex:0];
-                    /*
-                     * If the array is full of primitive elements, set it to the JSON as such
-                     */
-                    
                     if ([firstObject isKindOfClass:[NSString class]] ||
                         [firstObject isKindOfClass:[NSNumber class]]) {
                         
@@ -436,9 +429,6 @@ const char * property_getTypeString( objc_property_t property )
                         
                     } else {
                         
-                        /*
-                         * If the array is made up of custom nsobjects, serialize them too
-                         */
                         NSMutableArray * customObjArray = [[NSMutableArray alloc] init];
                         for (id arrayObj in objArray) {
                             if ([arrayObj isKindOfClass:[NSObject class]]){
@@ -450,41 +440,87 @@ const char * property_getTypeString( objc_property_t property )
                         //[customObjArray release];
                         
                     }
+                } else {
+                    NSArray * emptyArray = [[NSArray alloc] init];
+                    [resultDict setValue:emptyArray forKey:[self customKeyForPropertyName:currentProperty]];
+                    //[emptyArray release];
                 }
                 
-            } else {
-                NSArray * emptyArray = [[NSArray alloc] init];
-                [resultDict setValue:emptyArray forKey:[self customKeyForPropertyName:currentProperty]];
-                //[emptyArray release];
-            }
-            
-            
-        } else if ([NSObject isPropertyTypeBasic:propType]) {
-            
-            id basicValue = [self valueForKey:currentProperty];
-            if (basicValue == nil) {
-                basicValue = @"";
-            }
-            [resultDict setValue:basicValue forKey:[self customKeyForPropertyName:currentProperty]];
-            
-        } else {
-            
-            id kvcChild = [self valueForKey:currentProperty];
-            if (kvcChild == nil) {
-                  if ([[kvcChild class] isSubclassOfClass:[NSManagedObject class]]) {
-                    kvcChild = [[kvcChild class] MR_createEntity];
-                  } else if ([[kvcChild class] isSubclassOfClass:[NSObject class]]) {
-                      kvcChild = [[NSObject alloc] init]; //autorelease];
-                  }
-            }
-            if ([kvcChild isKindOfClass:[NSObject class]]) {
-                if (![kvcChild traversed]) {
-                    NSDictionary * childDict = [kvcChild objectToDictionary];
-                    [resultDict setValue:childDict forKey:[self customKeyForPropertyName:currentProperty]];
+            } else if ([NSObject isPropertyTypeSet:propType]) {
+#warning Code Smell!
+                /*
+                 * if the collection is a set, why not convert it to an array :)
+                 * The below part needs cleanup. Code smell. Repetitive code
+                 */
+                
+                NSSet * objSet = [self valueForKey:currentProperty];
+                if (objSet.count > 0) {
+                    NSArray * objArray = [objSet allObjects];
+                    if ([objArray count] > 0) {
+                        id firstObject = [objArray objectAtIndex:0];
+                        /*
+                         * If the array is full of primitive elements, set it to the JSON as such
+                         */
+                        
+                        if ([firstObject isKindOfClass:[NSString class]] ||
+                            [firstObject isKindOfClass:[NSNumber class]]) {
+                            
+                            [resultDict setValue:objArray forKey:[self customKeyForPropertyName:currentProperty]];
+                            
+                        } else {
+                            
+                            /*
+                             * If the array is made up of custom nsobjects, serialize them too
+                             */
+                            NSMutableArray * customObjArray = [[NSMutableArray alloc] init];
+                            for (id arrayObj in objArray) {
+                                if ([arrayObj isKindOfClass:[NSObject class]]){
+                                    NSDictionary * childDict = [arrayObj objectToDictionary];
+                                    [customObjArray addObject:childDict];
+                                }
+                            }
+                            [resultDict setValue:customObjArray forKey:[self customKeyForPropertyName:currentProperty]];
+                            //[customObjArray release];
+                            
+                        }
+                    }
+                    
+                } else {
+                    NSArray * emptyArray = [[NSArray alloc] init];
+                    [resultDict setValue:emptyArray forKey:[self customKeyForPropertyName:currentProperty]];
+                    //[emptyArray release];
                 }
+                
+                
+            } else if ([NSObject isPropertyTypeBasic:propType]) {
+                
+                id basicValue = [self valueForKey:currentProperty];
+                if (basicValue == nil) {
+                    basicValue = @"";
+                }
+                [resultDict setValue:basicValue forKey:[self customKeyForPropertyName:currentProperty]];
+                
+            } else {
+                
+                id kvcChild = [self valueForKey:currentProperty];
+                if (kvcChild == nil) {
+                    if ([[kvcChild class] isSubclassOfClass:[NSManagedObject class]]) {
+                        kvcChild = [[kvcChild class] MR_createEntity];
+                    } else if ([[kvcChild class] isSubclassOfClass:[NSObject class]]) {
+                        kvcChild = [[NSObject alloc] init]; //autorelease];
+                    }
+                }
+                if ([kvcChild isKindOfClass:[NSObject class]]) {
+                    if (![kvcChild traversed]) {
+                        NSDictionary * childDict = [kvcChild objectToDictionary];
+                        [resultDict setValue:childDict forKey:[self customKeyForPropertyName:currentProperty]];
+                    }
+                }
+                
             }
-            
+
         }
+        
         
     }
     return resultDict; //autorelease];
