@@ -286,7 +286,6 @@ const char * property_getTypeString( objc_property_t property )
     id kvcObject = nil;
     Class classType =  NSClassFromString([NSString stringWithCString:className encoding:NSUTF8StringEncoding]);
     if ([[self class] isSubclassOfClass:[NSManagedObject class]]) {
-        
         kvcObject = [[self class] createOrUpdateManagedObjectWithJSONMap:inputDict andPropertyMap:propertyDict];
     } else {
         kvcObject = [[classType alloc] init];
@@ -344,35 +343,8 @@ const char * property_getTypeString( objc_property_t property )
                     NSArray  * jArray = (NSArray *)propertyValue;
                     
                     if ([[self class] isSubclassOfClass:[NSManagedObject class]]) {
-                        BOOL deletedPreviousConnections = NO;
-                        
-                        for (NSDictionary * item in jArray) {
-                            
-                            Class childClass = NSClassFromString(componentType);
-                            id kvcChild = [childClass dictionaryToObject:item];
-                            NSString * capitalisedPropertyName = [propertyName stringByReplacingCharactersInRange:NSMakeRange(0,1)
-                                                                                                       withString:[[propertyName substringToIndex:1] capitalizedString]];
-                            
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-                            // We need to remove existing connections to a relationship to avoid duplicates while updating. So remove existing connections
-                            // and then add new ones!
-                            if (!deletedPreviousConnections) {
-                                NSString * delSelName = [NSString stringWithFormat:@"remove%@:",capitalisedPropertyName];
-                                NSSet * collectionSet = [kvcObject valueForKey:propertyName];
-                                
-                                SEL deleteCoreDataAccessorSEL  = NSSelectorFromString(delSelName);
-                                [kvcObject performSelector:deleteCoreDataAccessorSEL withObject:collectionSet];
-                                deletedPreviousConnections = YES;
-                                
-                            }
-                            NSString * addSelName = [NSString stringWithFormat:@"add%@Object:",capitalisedPropertyName];
-                            SEL addCoreDataAccessorSEL  = NSSelectorFromString(addSelName);
-                            [kvcObject performSelector:addCoreDataAccessorSEL withObject:kvcChild];
-#pragma clang diagnostic pop
-                            
-                        }
+                        // Implementation inside NSManagedObject Category
+                        kvcObject = [[self class] SetupRelationshipsForObject:kvcObject withJsonArray:jArray componentType:componentType andPropertyName:propertyName];
                     }
                     
                 } else if ([NSObject isPropertyTypeBasic:propType]) {

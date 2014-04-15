@@ -42,5 +42,37 @@
     return kvcObject;
 }
 
++(id)SetupRelationshipsForObject:(id)kvcObject withJsonArray:(NSArray *)jArray componentType:(NSString *)componentType andPropertyName:(NSString *)propertyName {
+    BOOL deletedPreviousConnections = NO;
+    
+    for (NSDictionary * item in jArray) {
+        
+        Class childClass = NSClassFromString(componentType);
+        id kvcChild = [childClass dictionaryToObject:item];
+        NSString * capitalisedPropertyName = [propertyName stringByReplacingCharactersInRange:NSMakeRange(0,1)
+                                                                                   withString:[[propertyName substringToIndex:1] capitalizedString]];
+        
+        
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        // We need to remove existing connections to a relationship to avoid duplicates while updating. So remove existing connections
+        // and then add new ones!
+        if (!deletedPreviousConnections) {
+            NSString * delSelName = [NSString stringWithFormat:@"remove%@:",capitalisedPropertyName];
+            NSSet * collectionSet = [kvcObject valueForKey:propertyName];
+            
+            SEL deleteCoreDataAccessorSEL  = NSSelectorFromString(delSelName);
+            [kvcObject performSelector:deleteCoreDataAccessorSEL withObject:collectionSet];
+            deletedPreviousConnections = YES;
+            
+        }
+        NSString * addSelName = [NSString stringWithFormat:@"add%@Object:",capitalisedPropertyName];
+        SEL addCoreDataAccessorSEL  = NSSelectorFromString(addSelName);
+        [kvcObject performSelector:addCoreDataAccessorSEL withObject:kvcChild];
+#pragma clang diagnostic pop
+        
+    }
+    return kvcObject;
+}
 
 @end

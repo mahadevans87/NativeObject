@@ -13,5 +13,5 @@
 
 +(NSString *)getPrimaryKeyProperty;
 +(NSManagedObject *)createOrUpdateManagedObjectWithJSONMap:(NSDictionary *)inputDict andPropertyMap:(NSDictionary *)propertyMap;
-
++(id)SetupRelationshipsForObject:(id)kvcObject withJsonArray:(NSArray *)jArray componentType:(NSString *)componentType andPropertyName:(NSString *)propertyName;
 @end
