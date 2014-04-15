@@ -2,7 +2,7 @@
 //  InfoEntity.m
 //  CoreDataMapper
 //
-//  Created by Mahadevan on 14/04/14.
+//  Created by Mahadevan on 15/04/14.
 //  Copyright (c) 2014 Mahadevan Sreenivasan. All rights reserved.
 //
 
@@ -18,14 +18,24 @@
 @dynamic weatherDescription;
 @dynamic weatherDetail;
 
-+(NSString *)getPrimaryKeyOfJsonObject {
-    return @"id";
+
++(NSString *)getPrimaryKeyProperty {
+    return @"uId";
 }
 
 
--(NSString *)getPropertyNameForJsonKey:(NSString *)jsonKey {
++(NSString *)getJsonKeyForPropertyName:(NSString *)propertyName {
+    if ([propertyName isEqualToString:@"uId"]) {
+        return @"id";
+    }
+    return nil;
+}
+
++(NSString *)getPropertyNameForJsonKey:(NSString *)jsonKey {
     if ([jsonKey isEqualToString:@"description"]) {
         return @"weatherDescription";
+    } else if ([jsonKey isEqualToString:@"id"]) {
+        return @"uId";
     }
     return nil;
 }

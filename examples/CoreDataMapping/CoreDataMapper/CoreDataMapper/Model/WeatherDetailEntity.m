@@ -2,7 +2,7 @@
 //  WeatherDetailEntity.m
 //  CoreDataMapper
 //
-//  Created by Mahadevan on 14/04/14.
+//  Created by Mahadevan on 15/04/14.
 //  Copyright (c) 2014 Mahadevan Sreenivasan. All rights reserved.
 //
 

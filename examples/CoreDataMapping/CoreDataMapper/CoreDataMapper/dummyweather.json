@@ -19,7 +19,7 @@
                 ],
     "base": "cmc stations",
     "main": {
-        "temp": 306.15,
+        "temp": 316.15,
         "pressure": 1012,
         "humidity": 55,
         "temp_min": 306.15,
@@ -34,6 +34,6 @@
     },
     "dt": 1396932000,
     "id": 1264527,
-    "name": "Madras",
+    "name": "MAS",
     "cod": 200
 }

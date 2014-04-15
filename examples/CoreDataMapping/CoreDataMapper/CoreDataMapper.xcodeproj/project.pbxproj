@@ -49,12 +49,12 @@
 		60D8D1D318FBBF270069E7A3 /* MagicalRecord+ShorthandSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D8D1B518FBBF270069E7A3 /* MagicalRecord+ShorthandSupport.m */; };
 		60D8D1D418FBBF270069E7A3 /* MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D8D1B718FBBF270069E7A3 /* MagicalRecord.m */; };
 		60D8D1D618FBBF870069E7A3 /* dummyweather.json in Resources */ = {isa = PBXBuildFile; fileRef = 60D8D1D518FBBF870069E7A3 /* dummyweather.json */; };
-		60D8D1F118FBC1550069E7A3 /* CoordinateEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D8D1E818FBC1550069E7A3 /* CoordinateEntity.m */; };
-		60D8D1F218FBC1550069E7A3 /* InfoEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D8D1EA18FBC1550069E7A3 /* InfoEntity.m */; };
-		60D8D1F318FBC1550069E7A3 /* MainEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D8D1EC18FBC1550069E7A3 /* MainEntity.m */; };
-		60D8D1F418FBC1550069E7A3 /* SystemEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D8D1EE18FBC1550069E7A3 /* SystemEntity.m */; };
-		60D8D1F518FBC1550069E7A3 /* WeatherDetailEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D8D1F018FBC1550069E7A3 /* WeatherDetailEntity.m */; };
 		60D8D1F818FBF5190069E7A3 /* NSManagedObject+KVCSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D8D1F718FBF5190069E7A3 /* NSManagedObject+KVCSerializer.m */; };
+		60FBFD2018FD008C0072AD3E /* MainEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FBFD1F18FD008C0072AD3E /* MainEntity.m */; };
+		60FBFD2318FD008C0072AD3E /* WeatherDetailEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FBFD2218FD008C0072AD3E /* WeatherDetailEntity.m */; };
+		60FBFD2618FD008C0072AD3E /* SystemEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FBFD2518FD008C0072AD3E /* SystemEntity.m */; };
+		60FBFD2918FD008C0072AD3E /* CoordinateEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FBFD2818FD008C0072AD3E /* CoordinateEntity.m */; };
+		60FBFD2C18FD008C0072AD3E /* InfoEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FBFD2B18FD008C0072AD3E /* InfoEntity.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,18 +144,18 @@
 		60D8D1B918FBBF270069E7A3 /* MagicalRecordShorthand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalRecordShorthand.h; sourceTree = "<group>"; };
 		60D8D1BA18FBBF270069E7A3 /* CoreData+MagicalRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoreData+MagicalRecord.h"; sourceTree = "<group>"; };
 		60D8D1D518FBBF870069E7A3 /* dummyweather.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dummyweather.json; sourceTree = "<group>"; };
-		60D8D1E718FBC1550069E7A3 /* CoordinateEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoordinateEntity.h; sourceTree = "<group>"; };
-		60D8D1E818FBC1550069E7A3 /* CoordinateEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoordinateEntity.m; sourceTree = "<group>"; };
-		60D8D1E918FBC1550069E7A3 /* InfoEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoEntity.h; sourceTree = "<group>"; };
-		60D8D1EA18FBC1550069E7A3 /* InfoEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoEntity.m; sourceTree = "<group>"; };
-		60D8D1EB18FBC1550069E7A3 /* MainEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainEntity.h; sourceTree = "<group>"; };
-		60D8D1EC18FBC1550069E7A3 /* MainEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainEntity.m; sourceTree = "<group>"; };
-		60D8D1ED18FBC1550069E7A3 /* SystemEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemEntity.h; sourceTree = "<group>"; };
-		60D8D1EE18FBC1550069E7A3 /* SystemEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemEntity.m; sourceTree = "<group>"; };
-		60D8D1EF18FBC1550069E7A3 /* WeatherDetailEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherDetailEntity.h; sourceTree = "<group>"; };
-		60D8D1F018FBC1550069E7A3 /* WeatherDetailEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherDetailEntity.m; sourceTree = "<group>"; };
 		60D8D1F618FBF5190069E7A3 /* NSManagedObject+KVCSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+KVCSerializer.h"; sourceTree = "<group>"; };
 		60D8D1F718FBF5190069E7A3 /* NSManagedObject+KVCSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+KVCSerializer.m"; sourceTree = "<group>"; };
+		60FBFD1E18FD008C0072AD3E /* MainEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainEntity.h; path = CoreDataMapper/Model/MainEntity.h; sourceTree = "<group>"; };
+		60FBFD1F18FD008C0072AD3E /* MainEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainEntity.m; path = CoreDataMapper/Model/MainEntity.m; sourceTree = "<group>"; };
+		60FBFD2118FD008C0072AD3E /* WeatherDetailEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WeatherDetailEntity.h; path = CoreDataMapper/Model/WeatherDetailEntity.h; sourceTree = "<group>"; };
+		60FBFD2218FD008C0072AD3E /* WeatherDetailEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WeatherDetailEntity.m; path = CoreDataMapper/Model/WeatherDetailEntity.m; sourceTree = "<group>"; };
+		60FBFD2418FD008C0072AD3E /* SystemEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SystemEntity.h; path = CoreDataMapper/Model/SystemEntity.h; sourceTree = "<group>"; };
+		60FBFD2518FD008C0072AD3E /* SystemEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SystemEntity.m; path = CoreDataMapper/Model/SystemEntity.m; sourceTree = "<group>"; };
+		60FBFD2718FD008C0072AD3E /* CoordinateEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoordinateEntity.h; path = CoreDataMapper/Model/CoordinateEntity.h; sourceTree = "<group>"; };
+		60FBFD2818FD008C0072AD3E /* CoordinateEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoordinateEntity.m; path = CoreDataMapper/Model/CoordinateEntity.m; sourceTree = "<group>"; };
+		60FBFD2A18FD008C0072AD3E /* InfoEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InfoEntity.h; path = CoreDataMapper/Model/InfoEntity.h; sourceTree = "<group>"; };
+		60FBFD2B18FD008C0072AD3E /* InfoEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InfoEntity.m; path = CoreDataMapper/Model/InfoEntity.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +187,16 @@
 			isa = PBXGroup;
 			children = (
 				60D8C9F818FBBD890069E7A3 /* CoreDataMapper */,
+				60FBFD2A18FD008C0072AD3E /* InfoEntity.h */,
+				60FBFD2B18FD008C0072AD3E /* InfoEntity.m */,
+				60FBFD2718FD008C0072AD3E /* CoordinateEntity.h */,
+				60FBFD2818FD008C0072AD3E /* CoordinateEntity.m */,
+				60FBFD2418FD008C0072AD3E /* SystemEntity.h */,
+				60FBFD2518FD008C0072AD3E /* SystemEntity.m */,
+				60FBFD2118FD008C0072AD3E /* WeatherDetailEntity.h */,
+				60FBFD2218FD008C0072AD3E /* WeatherDetailEntity.m */,
+				60FBFD1E18FD008C0072AD3E /* MainEntity.h */,
+				60FBFD1F18FD008C0072AD3E /* MainEntity.m */,
 				60D8CA1118FBBD890069E7A3 /* CoreDataMapperTests */,
 				60D8C9F118FBBD890069E7A3 /* Frameworks */,
 				60D8C9F018FBBD890069E7A3 /* Products */,
@@ -217,7 +227,6 @@
 		60D8C9F818FBBD890069E7A3 /* CoreDataMapper */ = {
 			isa = PBXGroup;
 			children = (
-				60D8D1E618FBC1550069E7A3 /* Model */,
 				60D8CE2B18FBBF120069E7A3 /* NativeObject */,
 				60D8CA0118FBBD890069E7A3 /* AppDelegate.h */,
 				60D8CA0218FBBD890069E7A3 /* AppDelegate.m */,
@@ -374,23 +383,6 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
-		60D8D1E618FBC1550069E7A3 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				60D8D1E718FBC1550069E7A3 /* CoordinateEntity.h */,
-				60D8D1E818FBC1550069E7A3 /* CoordinateEntity.m */,
-				60D8D1E918FBC1550069E7A3 /* InfoEntity.h */,
-				60D8D1EA18FBC1550069E7A3 /* InfoEntity.m */,
-				60D8D1EB18FBC1550069E7A3 /* MainEntity.h */,
-				60D8D1EC18FBC1550069E7A3 /* MainEntity.m */,
-				60D8D1ED18FBC1550069E7A3 /* SystemEntity.h */,
-				60D8D1EE18FBC1550069E7A3 /* SystemEntity.m */,
-				60D8D1EF18FBC1550069E7A3 /* WeatherDetailEntity.h */,
-				60D8D1F018FBC1550069E7A3 /* WeatherDetailEntity.m */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -496,17 +488,17 @@
 				60D8D1CA18FBBF270069E7A3 /* NSManagedObjectContext+MagicalThreading.m in Sources */,
 				60D8D1C718FBBF270069E7A3 /* NSManagedObjectContext+MagicalObserving.m in Sources */,
 				60D8D1BD18FBBF270069E7A3 /* NSEntityDescription+MagicalDataImport.m in Sources */,
+				60FBFD2018FD008C0072AD3E /* MainEntity.m in Sources */,
 				60D8CA0318FBBD890069E7A3 /* AppDelegate.m in Sources */,
-				60D8D1F118FBC1550069E7A3 /* CoordinateEntity.m in Sources */,
+				60FBFD2318FD008C0072AD3E /* WeatherDetailEntity.m in Sources */,
+				60FBFD2C18FD008C0072AD3E /* InfoEntity.m in Sources */,
 				60D8D1CD18FBBF270069E7A3 /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */,
+				60FBFD2918FD008C0072AD3E /* CoordinateEntity.m in Sources */,
 				60D8D1F818FBF5190069E7A3 /* NSManagedObject+KVCSerializer.m in Sources */,
 				60D8D1CB18FBBF270069E7A3 /* NSManagedObjectModel+MagicalRecord.m in Sources */,
 				60D8C9FF18FBBD890069E7A3 /* main.m in Sources */,
 				60D8D1CC18FBBF270069E7A3 /* NSPersistentStore+MagicalRecord.m in Sources */,
-				60D8D1F318FBC1550069E7A3 /* MainEntity.m in Sources */,
 				60D8D1D018FBBF270069E7A3 /* MagicalRecord+iCloud.m in Sources */,
-				60D8D1F518FBC1550069E7A3 /* WeatherDetailEntity.m in Sources */,
-				60D8D1F218FBC1550069E7A3 /* InfoEntity.m in Sources */,
 				60D8D1D318FBBF270069E7A3 /* MagicalRecord+ShorthandSupport.m in Sources */,
 				60D8D1C418FBBF270069E7A3 /* NSManagedObject+MagicalFinders.m in Sources */,
 				60D8D1BF18FBBF270069E7A3 /* NSObject+MagicalDataImport.m in Sources */,
@@ -518,7 +510,7 @@
 				60D8D1D218FBBF270069E7A3 /* MagicalRecord+Setup.m in Sources */,
 				60D8D1CF18FBBF270069E7A3 /* MagicalRecord+ErrorHandling.m in Sources */,
 				60D8D1CE18FBBF270069E7A3 /* MagicalRecord+Actions.m in Sources */,
-				60D8D1F418FBC1550069E7A3 /* SystemEntity.m in Sources */,
+				60FBFD2618FD008C0072AD3E /* SystemEntity.m in Sources */,
 				60D8CA2318FBBDAB0069E7A3 /* Model.xcdatamodeld in Sources */,
 				60D8D1C818FBBF270069E7A3 /* NSManagedObjectContext+MagicalRecord.m in Sources */,
 				60D8D1BE18FBBF270069E7A3 /* NSNumber+MagicalDataImport.m in Sources */,
@@ -719,6 +711,7 @@
 				60D8CA1D18FBBD890069E7A3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		60D8CA1E18FBBD890069E7A3 /* Build configuration list for PBXNativeTarget "CoreDataMapperTests" */ = {
 			isa = XCConfigurationList;
@@ -727,6 +720,7 @@
 				60D8CA2018FBBD890069E7A3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

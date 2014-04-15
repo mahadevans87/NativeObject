@@ -32,16 +32,16 @@
         <attribute name="dt" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="placeName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <relationship name="coord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoordinateEntity" inverseName="weatherDetail" inverseEntity="CoordinateEntity" syncable="YES"/>
-        <relationship name="info" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="InfoEntity" inverseName="weatherDetail" inverseEntity="InfoEntity" syncable="YES"/>
-        <relationship name="main" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MainEntity" inverseName="weatherDetail" inverseEntity="MainEntity" syncable="YES"/>
-        <relationship name="sys" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SystemEntity" inverseName="weatherDetail" inverseEntity="SystemEntity" syncable="YES"/>
+        <relationship name="coord" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CoordinateEntity" inverseName="weatherDetail" inverseEntity="CoordinateEntity" syncable="YES"/>
+        <relationship name="info" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="InfoEntity" inverseName="weatherDetail" inverseEntity="InfoEntity" syncable="YES"/>
+        <relationship name="main" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="MainEntity" inverseName="weatherDetail" inverseEntity="MainEntity" syncable="YES"/>
+        <relationship name="sys" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="SystemEntity" inverseName="weatherDetail" inverseEntity="SystemEntity" syncable="YES"/>
     </entity>
     <elements>
         <element name="CoordinateEntity" positionX="-117" positionY="135" width="128" height="90"/>
         <element name="InfoEntity" positionX="-605" positionY="-9" width="128" height="120"/>
         <element name="MainEntity" positionX="-189" positionY="-117" width="128" height="135"/>
         <element name="SystemEntity" positionX="43" positionY="-120" width="128" height="118"/>
-        <element name="WeatherDetailEntity" positionX="-369" positionY="-30" width="128" height="165"/>
+        <element name="WeatherDetailEntity" positionX="-369" positionY="-30" width="128" height="163"/>
     </elements>
 </model>

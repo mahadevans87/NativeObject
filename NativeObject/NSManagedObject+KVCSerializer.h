@@ -12,5 +12,6 @@
 
 
 +(NSString *)getPrimaryKeyProperty;
++(NSManagedObject *)createOrUpdateManagedObjectWithJSONMap:(NSDictionary *)inputDict andPropertyMap:(NSDictionary *)propertyMap;
 
 @end

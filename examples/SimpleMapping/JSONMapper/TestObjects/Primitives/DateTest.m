@@ -11,14 +11,14 @@
 @implementation DateTest
 
 
--(id)getPropertyValueForName:(NSString *)propertyName withJsonKey:(NSString *)jsonKey andJsonValue:(NSString *)jsonValue {
++(id)getPropertyValueForName:(NSString *)propertyName withJsonKey:(NSString *)jsonKey andJsonValue:(NSString *)jsonValue {
     if ([propertyName isEqualToString:@"testDate"]) {
         return [NSDate date];
     }
     return nil;
 }
 
--(id)getJsonValueForName:(NSString *)propertyName withJsonKey:(NSString *)jsonKey andPropertyValue:(id)propertyValue {
++(id)getJsonValueForName:(NSString *)propertyName withJsonKey:(NSString *)jsonKey andPropertyValue:(id)propertyValue {
     if ([propertyName isEqualToString:@"testDate"]) {
         return @"12/2/2014";
     }
