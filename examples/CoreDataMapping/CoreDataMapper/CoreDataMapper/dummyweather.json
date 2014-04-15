@@ -1,0 +1,39 @@
+{
+    "coord": {
+        "lon": 80.28,
+        "lat": 13.09
+    },
+    "sys": {
+        "message": 0.0058,
+        "country": "IN",
+        "sunrise": 1396917015,
+        "sunset": 1396961466
+    },
+    "weather": [
+                {
+                "id": 801,
+                "main": "Clouds",
+                "description": "few clouds",
+                "icon": "02d"
+                }
+                ],
+    "base": "cmc stations",
+    "main": {
+        "temp": 306.15,
+        "pressure": 1012,
+        "humidity": 55,
+        "temp_min": 306.15,
+        "temp_max": 306.15
+    },
+    "wind": {
+        "speed": 6.2,
+        "deg": 170
+    },
+    "clouds": {
+        "all": 20
+    },
+    "dt": 1396932000,
+    "id": 1264527,
+    "name": "Madras",
+    "cod": 200
+}

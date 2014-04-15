@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5063" systemVersion="13C64" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="CoordinateEntity" representedClassName="CoordinateEntity" syncable="YES">
+        <attribute name="lat" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="lon" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="weatherDetail" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WeatherDetailEntity" inverseName="coord" inverseEntity="WeatherDetailEntity" syncable="YES"/>
+    </entity>
+    <entity name="InfoEntity" representedClassName="InfoEntity" syncable="YES">
+        <attribute name="icon" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="main" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="weatherDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="weatherDetail" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WeatherDetailEntity" inverseName="info" inverseEntity="WeatherDetailEntity" syncable="YES"/>
+    </entity>
+    <entity name="MainEntity" representedClassName="MainEntity" syncable="YES">
+        <attribute name="humidity" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="pressure" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="temp" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="tempMax" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="tempMin" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="weatherDetail" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WeatherDetailEntity" inverseName="main" inverseEntity="WeatherDetailEntity" syncable="YES"/>
+    </entity>
+    <entity name="SystemEntity" representedClassName="SystemEntity" syncable="YES">
+        <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="message" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="sunrise" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="sunset" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="weatherDetail" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WeatherDetailEntity" inverseName="sys" inverseEntity="WeatherDetailEntity" syncable="YES"/>
+    </entity>
+    <entity name="WeatherDetailEntity" representedClassName="WeatherDetailEntity" syncable="YES">
+        <attribute name="base" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dt" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="placeName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="coord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoordinateEntity" inverseName="weatherDetail" inverseEntity="CoordinateEntity" syncable="YES"/>
+        <relationship name="info" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="InfoEntity" inverseName="weatherDetail" inverseEntity="InfoEntity" syncable="YES"/>
+        <relationship name="main" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MainEntity" inverseName="weatherDetail" inverseEntity="MainEntity" syncable="YES"/>
+        <relationship name="sys" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SystemEntity" inverseName="weatherDetail" inverseEntity="SystemEntity" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="CoordinateEntity" positionX="-117" positionY="135" width="128" height="90"/>
+        <element name="InfoEntity" positionX="-605" positionY="-9" width="128" height="120"/>
+        <element name="MainEntity" positionX="-189" positionY="-117" width="128" height="135"/>
+        <element name="SystemEntity" positionX="43" positionY="-120" width="128" height="118"/>
+        <element name="WeatherDetailEntity" positionX="-369" positionY="-30" width="128" height="165"/>
+    </elements>
+</model>

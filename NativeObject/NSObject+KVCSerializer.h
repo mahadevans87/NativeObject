@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import "objc/runtime.h"
+#import "NSManagedObject+KVCSerializer.h"
 
 static char const * const ObjectTagKey = "ObjectTag";
 
@@ -17,15 +18,15 @@ static char const * const ObjectTagKey = "ObjectTag";
 }
 
 
-- (NSString *) getComponentTypeForCollection:(NSString *)propertyName;
++ (NSString *) getComponentTypeForCollection:(NSString *)propertyName;
 + (NSMutableDictionary *) getPropertiesAndTypesForClassName:(const char *)className;
 
 /*
  * In case you need to use a different property name for a json key, choose
  * from one of the two methods appropriately.
  */
-- (NSString *) getPropertyNameForJsonKey:(NSString *)jsonKey;
-- (NSString *) getJsonKeyForPropertyName:(NSString *)propertyName;
++ (NSString *) getPropertyNameForJsonKey:(NSString *)jsonKey;
++ (NSString *) getJsonKeyForPropertyName:(NSString *)propertyName;
 
 /*
  * In case you need to process a JSON key before assigning it to a property use the below method.
@@ -34,7 +35,7 @@ static char const * const ObjectTagKey = "ObjectTag";
  * In such cases, you might want to roll out your own implementation by overriding the below method, set a date formatter to the json value 
  * and return the computed propertyValue back.
  */
--(id) getPropertyValueForName:(NSString *)propertyName withJsonKey:(NSString *)jsonKey andJsonValue:(NSString *)jsonValue;
++ (id) getPropertyValueForName:(NSString *)propertyName withJsonKey:(NSString *)jsonKey andJsonValue:(NSString *)jsonValue;
 
 
 /*
@@ -46,7 +47,7 @@ static char const * const ObjectTagKey = "ObjectTag";
  * and return the computed JSONValue back.
  */
 
--(id) getJsonValueForName:(NSString *)propertyName withJsonKey:(NSString *)jsonKey andPropertyValue:(id)propertyValue;
++ (id) getJsonValueForName:(NSString *)propertyName withJsonKey:(NSString *)jsonKey andPropertyValue:(id)propertyValue;
 
 
 /*

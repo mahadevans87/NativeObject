@@ -23,7 +23,7 @@ const char * property_getTypeString( objc_property_t property );
     
 }
 
-- (NSString *) getJsonKeyForPropertyName:(NSString *)propertyName {
++ (NSString *) getJsonKeyForPropertyName:(NSString *)propertyName {
     
     return nil;
 }
@@ -31,23 +31,23 @@ const char * property_getTypeString( objc_property_t property );
 /*
  * Should be implemented by subclasses using NSArray types.
  */
-- (NSString *)getComponentTypeForCollection:(NSString *)propertyName {
++ (NSString *)getComponentTypeForCollection:(NSString *)propertyName {
     return nil;
 }
 
 /*
  * Should be implemented by subclasses that will have a different propertyName for a json key.
  */
-- (NSString *) getPropertyNameForJsonKey:(NSString *)jsonKey {
++ (NSString *) getPropertyNameForJsonKey:(NSString *)jsonKey {
     return nil;
 }
 
 
--(id) getPropertyValueForName:(NSString *)propertyName withJsonKey:(NSString *)jsonKey andJsonValue:(NSString *)jsonValue {
++ (id) getPropertyValueForName:(NSString *)propertyName withJsonKey:(NSString *)jsonKey andJsonValue:(NSString *)jsonValue {
     return nil;
 }
 
--(id) getJsonValueForName:(NSString *)propertyName withJsonKey:(NSString *)jsonKey andPropertyValue:(id)propertyValue {
++ (id) getJsonValueForName:(NSString *)propertyName withJsonKey:(NSString *)jsonKey andPropertyValue:(id)propertyValue {
     return nil;
 }
 
@@ -245,6 +245,35 @@ const char * property_getTypeString( objc_property_t property )
     return NO;
 }
 
+
++(NSManagedObject *)createOrUpdateManagedObjectWithJSONMap:(NSDictionary *)inputDict andPropertyMap:(NSDictionary *)propertyMap {
+    
+    NSManagedObject * kvcObject = nil;
+    NSString * primaryKeyProperty = [[self class] getPrimaryKeyProperty];
+    
+    if (primaryKeyProperty.length == 0) {
+        NSLog(@"No primary key specified - Creating %@",NSStringFromClass([self class]));
+        kvcObject = [[self class] MR_createEntity];
+    } else {
+        NSString * jsonKey = nil;
+        jsonKey = [[self class] getJsonKeyForPropertyName:primaryKeyProperty];
+        if (jsonKey.length == 0) {
+            NSLog(@"getJsonKeyForPropertyName for %@ is not implemented.Defaulting to %@",primaryKeyProperty,primaryKeyProperty);
+            jsonKey = primaryKeyProperty;
+        }
+        NSString * jsonValue = [inputDict objectForKey:jsonKey];
+        kvcObject = [[self class] MR_findFirstByAttribute:primaryKeyProperty withValue:jsonValue];
+        if (!kvcObject) {
+            kvcObject = [[self class] MR_createEntity];
+            NSLog(@"No object found for %@ - Creating %@",jsonValue, NSStringFromClass([self class]));
+        } else {
+            NSLog(@"Object found for %@ - Updating %@",jsonValue, NSStringFromClass([self class]));
+        }
+    }
+    
+    return kvcObject;
+}
+
 +(id) objectForPropertyKey:(NSString *)propertyType {
     id kvcObject = [[NSClassFromString(propertyType) alloc] init];
     return kvcObject; //autorelease];
@@ -285,7 +314,8 @@ const char * property_getTypeString( objc_property_t property )
     id kvcObject = nil;
     Class classType =  NSClassFromString([NSString stringWithCString:className encoding:NSUTF8StringEncoding]);
     if ([[self class] isSubclassOfClass:[NSManagedObject class]]) {
-        kvcObject = [[self class] MR_createEntity];
+        
+        kvcObject = [[self class] createOrUpdateManagedObjectWithJSONMap:inputDict andPropertyMap:propertyDict];
     } else {
         kvcObject = [[classType alloc] init];
     }
@@ -295,7 +325,7 @@ const char * property_getTypeString( objc_property_t property )
         
         NSString * propertyName = key;
         if (![propertyKeys containsObject:key]) {
-            propertyName = [kvcObject getPropertyNameForJsonKey:key];
+            propertyName = [[kvcObject class] getPropertyNameForJsonKey:key];
         }
         if (propertyName) {
             NSString * propType = [propertyDict objectForKey:propertyName];
@@ -307,7 +337,7 @@ const char * property_getTypeString( objc_property_t property )
                 continue;
             }
             
-            id propertyValue = [kvcObject getPropertyValueForName:propertyName withJsonKey:key andJsonValue:[inputDict objectForKey:key]];
+            id propertyValue = [[self class] getPropertyValueForName:propertyName withJsonKey:key andJsonValue:[inputDict objectForKey:key]];
             
             if (propertyValue != nil) {
                 [kvcObject setValue:propertyValue forKey:propertyName];
@@ -319,7 +349,7 @@ const char * property_getTypeString( objc_property_t property )
                  * NSManagedObjects usually has collections as NSSet's which is handled in the next case.
                  */
                 if ([NSObject isPropertyTypeArray:propType]) {
-                    NSString * componentType = [kvcObject getComponentTypeForCollection:propertyName];
+                    NSString * componentType = [[kvcObject class] getComponentTypeForCollection:propertyName];
                     NSArray  * jArray = (NSArray *)propertyValue;
                     
                     if ([[self class] isSubclassOfClass:[NSObject class]]) {
@@ -338,7 +368,7 @@ const char * property_getTypeString( objc_property_t property )
                    * Instead we have to call the add'RelationshipEntity'Object: which is specified in the CoreDataAccessors for that entity.
                    */
                 else if ([NSObject isPropertyTypeSet:propType]) {
-                    NSString * componentType = [kvcObject getComponentTypeForCollection:propertyName];
+                    NSString * componentType = [[kvcObject class] getComponentTypeForCollection:propertyName];
                     NSArray  * jArray = (NSArray *)propertyValue;
                     
                     if ([[self class] isSubclassOfClass:[NSManagedObject class]]) {
@@ -381,7 +411,7 @@ const char * property_getTypeString( objc_property_t property )
 }
 
 - (NSString *)customKeyForPropertyName:(NSString *)propertyName {
-    NSString * customJsonKey = [self getJsonKeyForPropertyName:propertyName];
+    NSString * customJsonKey = [[self class] getJsonKeyForPropertyName:propertyName];
     if (customJsonKey == nil) {
         return propertyName;
     } else {
@@ -411,7 +441,7 @@ const char * property_getTypeString( objc_property_t property )
         
         id propValue = [self valueForKey:currentProperty];
         
-        id customValue = [self getJsonValueForName:currentProperty withJsonKey:[self customKeyForPropertyName:currentProperty] andPropertyValue:propValue];
+        id customValue = [[self class] getJsonValueForName:currentProperty withJsonKey:[self customKeyForPropertyName:currentProperty] andPropertyValue:propValue];
         if (customValue != nil) {
             [resultDict setValue:customValue forKey:[self customKeyForPropertyName:currentProperty]];
 
