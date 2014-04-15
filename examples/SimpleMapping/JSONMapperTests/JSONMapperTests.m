@@ -9,6 +9,7 @@
 #import <XCTest/XCTest.h>
 #import "ParentObject.h"
 #import "DateTest.h"
+#import "NSObject+KVCSerializer.h"
 
 @interface JSONMapperTests : XCTestCase
 
