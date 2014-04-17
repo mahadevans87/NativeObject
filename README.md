@@ -1,4 +1,4 @@
-A collection of NSObject Extensions which allows to map s JSON / XML ( NSDictionary ) to NSObject / NSManagedObject and vice versa. Say no more to boring manual parsing!
+A collection of NSObject Extensions which allows to map s JSON / XML ( NSDictionary ) to NSObject / NSManagedObject and vice versa. Say NO to boring manual parsing!
 
 
 Lets assume there is a sample JSON as below
