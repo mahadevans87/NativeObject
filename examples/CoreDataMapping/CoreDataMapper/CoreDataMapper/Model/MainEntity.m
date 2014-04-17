@@ -19,4 +19,23 @@
 @dynamic tempMin;
 @dynamic weatherDetail;
 
+
++(NSString*)getJsonKeyForPropertyName:(NSString *)propertyName {
+    if ([propertyName isEqualToString:@"tempMax"]) {
+        return @"temp_max";
+    } else     if ([propertyName isEqualToString:@"tempMin"]) {
+        return @"temp_min";
+    }
+    return nil;
+}
+
++(NSString*)getPropertyNameForJsonKey:(NSString *)jsonKey {
+    if ([jsonKey isEqualToString:@"temp_max"]) {
+        return @"tempMax";
+    } else     if ([jsonKey isEqualToString:@"temp_min"]) {
+        return @"tempMin";
+    }
+    return nil;
+}
+
 @end

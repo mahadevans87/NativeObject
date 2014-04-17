@@ -15,6 +15,12 @@
                 "main": "Clouds",
                 "description": "few clouds",
                 "icon": "02d"
+                },
+                {
+                "id": 802,
+                "main": "Rain",
+                "description": "Heavy Rain",
+                "icon": "x99"
                 }
                 ],
     "base": "cmc stations",
